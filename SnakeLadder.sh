@@ -11,20 +11,26 @@ LADDER=2
 #variables
 position=0
 
-#dieRoll
-dieRoll=$((RANDOM%6+1))
-printf "After rolling a die Player gets value $dieRoll"
 
 #options
-optionCheck=$((RANDOM%3))
-case $optionCheck in
-	$NOPLAY)
-			 NOPLAY=$(($position+$NOPLAY))
-			 ;;
-	$SNAKE)
-			SNAKE=$(($position-$dieRoll))
-			 ;;
-	$LADDER)
-			LADDER=$(($position+$dieRoll))
-			 ;;
-esac
+while(( $position < 100 ))
+do
+	dieRoll=$((RANDOM%6+1))
+	optionCheck=$((RANDOM%3))
+	case $optionCheck in
+		$NOPLAY)
+				 position=$(($position+$NOPLAY))
+				 ;;
+		$SNAKE)
+				position=$(($position-$dieRoll))
+				if (( position < 0 ))
+				then
+					position=0
+				fi
+				 ;;
+		$LADDER)
+				position=$(($position+$dieRoll))
+				 ;;
+	esac
+
+done
