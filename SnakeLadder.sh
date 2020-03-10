@@ -30,6 +30,10 @@ do
 				 ;;
 		$LADDER)
 				position=$(($position+$dieRoll))
+				if(( position > 100 ))
+				then
+					position=$(($position-$dieRoll))
+				fi
 				 ;;
 	esac
 
