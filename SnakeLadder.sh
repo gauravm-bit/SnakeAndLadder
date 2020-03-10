@@ -10,13 +10,17 @@ LADDER=2
 
 #variables
 position=0
+count=0
+index=1
 
+declare -A diceDict
 
 #options
-while(( $position < 100 ))
+while(( position < 100 ))
 do
 	dieRoll=$((RANDOM%6+1))
 	optionCheck=$((RANDOM%3))
+	count=$(($count+1))
 	case $optionCheck in
 		$NOPLAY)
 				 position=$(($position+$NOPLAY))
@@ -36,5 +40,11 @@ do
 				fi
 				 ;;
 	esac
+	diceDict[$count]=$position
+done
 
+while (( $index <= $count ))
+do
+	echo "$index---->${diceDict[$index]}"
+	index=$(($index+1))
 done
